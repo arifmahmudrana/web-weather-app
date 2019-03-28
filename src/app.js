@@ -1,7 +1,4 @@
-const { error } = require('dotenv').config();
-if (error) {
-  throw error;
-}
+require('dotenv').config();
 const mongoose = require('mongoose');
 if (process.env.NODE_ENV !== 'production') {
   mongoose.set('debug', true);

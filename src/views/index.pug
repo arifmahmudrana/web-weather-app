@@ -1,0 +1,18 @@
+extends layouts/app.pug
+
+block content
+  main.flex-grow-1.d-flex.flex-column.justify-content-center
+    .container
+      .row.d-flex.flex-column.align-items-center
+        .col-8
+          h1.text-center.mb-5 Weather App
+          form(action='/weather')
+            .row.mb-2
+              .col-12
+                .form-group
+                  input.form-control.form-control-lg(type='text' placeholder='Search location' name='location')
+            .row
+              .col-6
+                button.btn.btn-block.btn-info.mr-3(type='submit') Search
+              .col-6
+                a.btn.btn-block.btn-secondary(href='/weather' role='button') From IP

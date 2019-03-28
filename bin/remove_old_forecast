@@ -1,0 +1,38 @@
+#! /app/bin/node
+const { error } = require('dotenv').config();
+if (error) {
+  console.log('====================================');
+  console.log(error);
+  console.log('====================================');
+  process.exit(1);
+}
+const mongoose = require('mongoose');
+if (process.env.NODE_ENV !== 'production') {
+  mongoose.set('debug', true);
+}
+mongoose.set('useCreateIndex', true);
+
+const { Forecast } = require('../src/models/Forecast');
+
+
+mongoose
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+  .then(() => {
+    const time = new Date();
+    time.setDate(time.getDate() - 1);
+    return Forecast.deleteMany({
+      time: { $lte: time }
+    }).exec().then(() => {
+      mongoose.connection.close();
+    })
+    .catch(err => {
+      mongoose.connection.close();
+      throw err
+    });
+  })
+  .catch(err => {
+    console.log('====================================');
+    console.log(err);
+    console.log('====================================');
+    process.exit(1);
+  });

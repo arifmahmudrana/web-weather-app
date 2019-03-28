@@ -1,0 +1,16 @@
+extends layouts/app.pug
+
+block content
+  main.flex-grow-1.d-flex.flex-column.justify-content-center
+    .container
+      .row.d-flex.flex-column.align-items-center
+        .col-12.col-sm-6
+          .card
+            .card-header.bg-info.text-white
+              h1.h5.mb-0 Weather: #{location}
+            .card-body
+              p.card-text= summary
+              p.card-text Temperature(High): #{temperatureHigh}&deg;C
+              p.card-text Temperature(Low): #{temperatureLow}&deg;C
+              p.card-text Humidity: #{humidity}% 
+              p.card-text Precipitation: #{precipitation}%

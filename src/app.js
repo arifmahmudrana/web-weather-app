@@ -71,7 +71,7 @@ app.get('/weather', async (req, res, next) => {
     } else {
       let ip = '';
       if (process.env.NODE_ENV === 'production') {
-        ip = req.ip;
+        ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
       }
 
       let locationRow;
